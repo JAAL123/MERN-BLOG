@@ -98,3 +98,7 @@ form h1 {
   text-align: center;
   margin: 10px 0;
 }
+.formErrorMessage {
+  color: red;
+  margin: 10px 0;
+}
