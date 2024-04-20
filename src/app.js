@@ -1,8 +1,11 @@
+//dependencias
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import userRoutes from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
+//rutas
+import userRoutes from "./routes/user.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 
@@ -17,6 +20,7 @@ app.use(
 app.use(cookieParser());
 
 app.use("/api", userRoutes);
+app.use("/api", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("Api runnig");
