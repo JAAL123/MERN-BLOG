@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export function Register() {
   const {
@@ -8,9 +11,22 @@ export function Register() {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
+  const { signup, isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
+
   const onSubmit = handleSubmit(async (values) => {
-    console.log(values);
-     reset();
+    if (values.password !== values.confirmPassword) {
+      return alert("Las contraseñas no coinciden");
+    }
+    await signup(values);
+    reset();
   });
 
   return (
@@ -21,7 +37,7 @@ export function Register() {
           type="text"
           placeholder="Nombre de Usuario"
           className="formInput"
-          {...register("username", { required: true })}
+          {...register("userName", { required: true })}
         />
         {errors.username && (
           <p className="formErrorMessage">Este campo es requerido</p>
