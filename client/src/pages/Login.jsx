@@ -1,4 +1,7 @@
 import { useForm } from "react-hook-form";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export function Login() {
   const {
@@ -8,8 +11,20 @@ export function Login() {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
+  const { singin, isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    } else {
+      return navigate("/login");
+    }
+  }, [isAuthenticated]);
+
   const onSubmit = handleSubmit(async (values) => {
-    console.log(values);
+    singin(values);
     reset();
   });
   return (
@@ -20,7 +35,7 @@ export function Login() {
           type="text"
           placeholder="Nombre de Usuario"
           className="formInput"
-          {...register("username", { required: true })}
+          {...register("userName", { required: true })}
         />
         {errors.username && (
           <p className="formErrorMessage">Este campo es requerido</p>

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState, useEffect } from "react";
-import { registerRequest, verifyTokenRequest } from "../api/auth";
+import { registerRequest, verifyTokenRequest, loginRequest } from "../api/auth";
 import Cookies from "js-cookie";
 
 export const AuthContext = createContext();
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
       }
     }
     checkLogin();
-  }, []);
+  }, [isAuthenticated]);
 
   const signup = async (user) => {
     try {
@@ -58,8 +58,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const singin = async (credentials) => {
+    try {
+      const res = await loginRequest(credentials);
+      console.log(res.data);
+      setIsAuthenticated(true);
+      setUser(res.data);
+    } catch (error) {
+      console.log(error);
+      setIsAuthenticated(false);
+    }
+  };
+
+  const logout = async () => {
+    Cookies.remove("token");
+    setUser(null);
+    setIsAuthenticated(false);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, loading, signup }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, loading, signup, singin, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

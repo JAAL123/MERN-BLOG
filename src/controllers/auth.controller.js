@@ -3,6 +3,7 @@ import User from "../models/users.model.js";
 import { createAccessToken } from "../libs/jwt.js";
 import jwt from "jsonwebtoken";
 import { SECRET_TOKEN } from "../config.js";
+import e from "express";
 
 export const login = async (req, res) => {
   const { userName, password } = req.body;
@@ -24,7 +25,9 @@ export const login = async (req, res) => {
       username: userFound.userName,
     });
     res.cookie("token", token);
-    return res.status(200).json({ username: userFound.userName });
+    return res
+      .status(200)
+      .json({ username: userFound.userName, message: "ok"});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

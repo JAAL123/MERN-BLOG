@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-export  function Navbar() {
+export function Navbar() {
+  const { isAuthenticated, user, logout } = useAuth();
+  console.log(user);
   return (
     <>
       <header>
@@ -8,8 +11,20 @@ export  function Navbar() {
           MERN Blog
         </a>
         <nav className="">
-          <Link to={"/login"}>Iniciar Sesión</Link>
-          <Link to={"/register"}>Registrar</Link>
+          {isAuthenticated ? (
+            <>
+              <Link to="/profile">{user?.userName}</Link>
+              {/* <button onClick={logout} className="">Cerrar Sesion</button> */}
+              <Link onClick={logout} to="/">
+                Cerrar Sesion
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/login">Iniciar Sesion</Link>
+              <Link to="/register">Registrarse</Link>
+            </>
+          )}
         </nav>
       </header>
     </>
