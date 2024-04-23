@@ -8,6 +8,7 @@ import { Register } from "./pages/Register";
 import { AuthProvider } from "./context/AuthContext";
 //dependencies
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CreatePost } from "./pages/CreatePost";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/create-post" element={<CreatePost />} />
           </Routes>
         </main>
       </BrowserRouter>

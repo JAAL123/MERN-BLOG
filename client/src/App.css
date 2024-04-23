@@ -31,6 +31,10 @@ header a.logo {
   font-weight: bold;
   font-size: 1.5em;
 }
+header a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 header nav {
   display: flex;
   gap: 15px;
@@ -94,7 +98,8 @@ form.register {
   border-radius: 5px;
   padding: 8px 0;
 }
-form h1 {
+form h1.login,
+form h1.register{
   text-align: center;
   margin: 10px 0;
 }

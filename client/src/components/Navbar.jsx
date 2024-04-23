@@ -3,7 +3,6 @@ import { useAuth } from "../context/AuthContext";
 
 export function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
-  console.log(user);
   return (
     <>
       <header>
@@ -14,7 +13,7 @@ export function Navbar() {
           {isAuthenticated ? (
             <>
               <Link to="/profile">{user?.userName}</Link>
-              {/* <button onClick={logout} className="">Cerrar Sesion</button> */}
+              <Link to="/create-post">Crear Post</Link>
               <Link onClick={logout} to="/">
                 Cerrar Sesion
               </Link>
