@@ -24,6 +24,7 @@ export function CreatePost() {
           className="formInput"
           {...register("title", { required: true })}
         />
+        {errors.title && <span>Este campo es requerido</span>}
         <input
           type="text"
           name="summary"
@@ -31,12 +32,20 @@ export function CreatePost() {
           className="formInput"
           {...register("summary", { required: true })}
         />
-        <input type="file" className="formInput" {...register("image")} id="image" />
-        <Controller 
-            name="content"
-            control={control}
-            defaultValue=""
-            render={({ field }) => <ReactQuill {...field} theme="snow" />}
+        {errors.summary && <span>Este campo es requerido</span>}
+        <input
+          type="file"
+          className="formInput"
+          {...register("image", { required: true })}
+          id="image"
+          accept=".jpg,.png,.jpeg"
+        />
+        {errors.image && <span>Este campo es requerido</span>}
+        <Controller
+          name="content"
+          control={control}
+          defaultValue=""
+          render={({ field }) => <ReactQuill {...field} theme="snow" />}
         />
 
         <button className="formButton" style={{ marginTop: "10px" }}>
