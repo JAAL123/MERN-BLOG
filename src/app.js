@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 //rutas
 import userRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js";
+import postRoutes from "./routes/post.routes.js";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 app.use("/api", userRoutes);
 app.use("/api", authRoutes);
+app.use("/api", postRoutes);
 
 app.get("/", (req, res) => {
   res.send("Api runnig");
