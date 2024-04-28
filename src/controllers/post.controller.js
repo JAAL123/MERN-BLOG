@@ -10,14 +10,16 @@ export const createPost = async (req, res) => {
     }
 
     const newPost = new Post({ title, summary, content, image: file });
+    const postSaved = await newPost.save();
 
     res.status(201).json({
-      id: newPost._id,
-      title: newPost.title,
-      summary: newPost.summary,
-      content: newPost.content,
-      createdAt: newPost.createdAt,
-      updatedAt: newPost.updatedAt,
+      id: postSaved._id,
+      title: postSaved.title,
+      summary: postSaved.summary,
+      content: postSaved.content,
+      image: postSaved.image,
+      createdAt: postSaved.createdAt,
+      updatedAt: postSaved.updatedAt,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
