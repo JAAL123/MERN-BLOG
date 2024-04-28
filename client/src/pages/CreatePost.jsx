@@ -1,6 +1,7 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Controller, useForm } from "react-hook-form";
+import { createPostRequest } from "../api/post";
 
 export function CreatePost() {
   const {
@@ -11,12 +12,20 @@ export function CreatePost() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (values) => {
-    console.log(values);
+    const formData = new FormData();
+    formData.append("title", values.title);
+    formData.append("summary", values.summary);
+    formData.append("content", values.content);
+    formData.append("image", values.image[0]);
+
+    const res = await createPostRequest(formData);
+
+    console.log(res);
   });
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} encType="multipart/form-data">
         <input
           type="text"
           name="title"
