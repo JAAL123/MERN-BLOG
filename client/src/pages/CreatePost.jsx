@@ -2,6 +2,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Controller, useForm } from "react-hook-form";
 import { createPostRequest } from "../api/post";
+import { useNavigate } from "react-router-dom";
 
 export function CreatePost() {
   const {
@@ -9,7 +10,9 @@ export function CreatePost() {
     handleSubmit,
     formState: { errors },
     control,
+    reset,
   } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (values) => {
     const formData = new FormData();
@@ -20,7 +23,10 @@ export function CreatePost() {
 
     const res = await createPostRequest(formData);
 
-    console.log(res);
+    if (res.status === 201) {
+      navigate("/");
+      reset();
+    }
   });
 
   return (
