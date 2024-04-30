@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-export function Post({ post: { summary, title, createdAt } }) {
+export function Post({ post: { summary, title, createdAt, author:{userName} } }) {
   const date = new Date(createdAt);
-  const formattedDate = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}: ${date.getHours()}:${date.getMinutes()}`;
+  const formattedDate = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}:${date.getHours()}:${date.getMinutes()}`;
   return (
     <>
       <div className="post">
@@ -11,7 +11,7 @@ export function Post({ post: { summary, title, createdAt } }) {
         <div className="texts">
           <h2>{title}</h2>
           <p className="info">
-            <a className="author">Nombre autor</a>
+            <a className="author">{userName}</a>
             <time>{formattedDate}</time>
           </p>
           <p className="summary">{summary}</p>

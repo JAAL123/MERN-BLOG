@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { SECRET_TOKEN } from "../config";
+import { SECRET_TOKEN } from "../config.js";
 
 export const authenticateToken = (req, res, next) => {
   const { token } = req.cookies;
@@ -7,7 +7,6 @@ export const authenticateToken = (req, res, next) => {
 
   jwt.verify(token, SECRET_TOKEN, (err, user) => {
     if (err) return res.status(403).json({ message: "Forbidden" });
-
     req.user = user;
     next();
   });

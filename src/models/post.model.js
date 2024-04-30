@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
 const postSchema = new mongoose.Schema(
   {
@@ -17,6 +18,10 @@ const postSchema = new mongoose.Schema(
     image: {
       type: String,
       required: true,
+    },
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true }

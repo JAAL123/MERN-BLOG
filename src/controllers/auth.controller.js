@@ -3,7 +3,6 @@ import User from "../models/users.model.js";
 import { createAccessToken } from "../libs/jwt.js";
 import jwt from "jsonwebtoken";
 import { SECRET_TOKEN } from "../config.js";
-import e from "express";
 
 export const login = async (req, res) => {
   const { userName, password } = req.body;
