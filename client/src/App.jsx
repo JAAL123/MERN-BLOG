@@ -5,7 +5,9 @@ import { ArticleList } from "./pages/ArticleList";
 import { Profile } from "./pages/Profile";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
+//context
 import { AuthProvider } from "./context/AuthContext";
+import { PostProvider } from "./context/PostContext";
 //dependencies
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CreatePost } from "./pages/CreatePost";
@@ -13,18 +15,20 @@ import { CreatePost } from "./pages/CreatePost";
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <main>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<ArticleList />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/create-post" element={<CreatePost />} />
-          </Routes>
-        </main>
-      </BrowserRouter>
+      <PostProvider>
+        <BrowserRouter>
+          <main>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<ArticleList />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/create-post" element={<CreatePost />} />
+            </Routes>
+          </main>
+        </BrowserRouter>
+      </PostProvider>
     </AuthProvider>
   );
 }
