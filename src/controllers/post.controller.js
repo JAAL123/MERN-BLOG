@@ -23,14 +23,20 @@ export const createPost = async (req, res) => {
       updatedAt: postSaved.updatedAt,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
 
 export const getPosts = async (req, res) => {
+  const { page = 1, limit = 5 } = req.query;
   try {
-    const posts = await Post.find().populate("author", "userName");
+    const options = {
+      page,
+      limit,
+      sort: { createdAt: -1 },
+      populate: { path: "author", select: "userName" },
+    };
+    const posts = await Post.paginate({}, options);
     if (posts.length === 0)
       return res.status(404).json({ message: "Posts not found" });
     res.status(200).json(posts);
