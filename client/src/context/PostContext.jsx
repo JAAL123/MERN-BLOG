@@ -19,7 +19,7 @@ export const PostProvider = ({ children }) => {
   const getPosts = async () => {
     try {
       const res = await getPostsRequest();
-      setPosts(res.data);
+      setPosts(res.data.docs);
       setLoading(false);
     } catch (error) {
       console.log(error);
