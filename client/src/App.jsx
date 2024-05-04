@@ -11,6 +11,7 @@ import { PostProvider } from "./context/PostContext";
 //dependencies
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CreatePost } from "./pages/CreatePost";
+import { Article } from "./pages/Article";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/create-post" element={<CreatePost />} />
+              <Route path="/post/:id" element={<Article />} />
             </Routes>
           </main>
         </BrowserRouter>
