@@ -26,7 +26,7 @@ export function Article() {
         <div className="post-page-image">
           <img src={`http://localhost:4000/uploads/${article.image}`} alt="" />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: article.content }} />
+        <div dangerouslySetInnerHTML={{ __html: article.content }} className="content" />
       </div>
     </>
   );
