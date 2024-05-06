@@ -167,3 +167,56 @@ div.post-page div.content p {
   margin: 5px 0px;
   line-height: 1.5rem;
 }
+div.edit-row{
+  text-align: center;
+}
+a.edit-btn {
+  background-color: #333;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  padding: 15px 30px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+a.edit-btn:hover {
+  background-color: #555;
+}
+a.edit-btn svg{
+  height: 20px;
+}
+div.current-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 7px;
+  padding: 10px 7px;
+  width: 100%;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  gap: 20px;
+}
+div.current-image input{
+  border: none;
+
+}
+div.current-image img{
+  width: 150px;
+  height: 70px;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 5px;
+}
+
+/* .formInput {
+  display: block;
+  margin-bottom: 7px;
+  width: 100%;
+  padding: 10px 7px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+} */
