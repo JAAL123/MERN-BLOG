@@ -4,7 +4,6 @@ import { Controller, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { usePost } from "../context/PostContext";
-import { createPostRequest } from "../api/post";
 import { useNavigate } from "react-router-dom";
 
 export function EditPost() {
@@ -17,7 +16,7 @@ export function EditPost() {
   } = useForm();
 
   const { id } = useParams();
-  const { getPost } = usePost();
+  const { getPost, updatePost } = usePost();
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState(null);
 
@@ -42,12 +41,10 @@ export function EditPost() {
     formData.append("summary", values.summary);
     formData.append("content", values.content);
     formData.append("image", values.image[0]);
-    console.log(values)
-    // const res = await createPostRequest(formData);
-    // if (res.status === 201) {
-    //   navigate("/");
-    //   reset();
-    // }
+    const res = await updatePost(id, formData);
+    if (res) {
+      navigate("/");
+    }
   });
 
   const handleImageChange = (e) => {

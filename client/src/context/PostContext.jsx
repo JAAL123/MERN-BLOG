@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState } from "react";
-import { getPostsRequest, getPostRequest } from "../api/post";
+import {
+  getPostsRequest,
+  getPostRequest,
+  updatePostRequest,
+} from "../api/post";
 
 export const PostContext = createContext();
 
@@ -35,9 +39,17 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  const updatePost = async (id, post) => {
+    try {
+      const res = await updatePostRequest(id, post);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <PostContext.Provider value={{ loading, posts, getPosts,getPost }}>
+    <PostContext.Provider value={{ loading, posts, getPosts, getPost, updatePost }}>
       {children}
     </PostContext.Provider>
   );

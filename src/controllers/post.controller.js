@@ -27,6 +27,30 @@ export const createPost = async (req, res) => {
   }
 };
 
+export const updatePost = async (req, res) => {
+  const { id } = req.params;
+  const { title, summary, content } = req.body;
+  const file = req?.file?.filename;
+  const author = req.user.id;
+  try {
+    const postFound = await Post.findByIdAndUpdate(
+      id,
+      {
+        title,
+        summary,
+        content,
+        image: file,
+        author,
+      },
+      { new: true }
+    );
+    if (!postFound) return res.status(404).json({ message: "Post not found" });
+    res.status(200).json(postFound);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const getPosts = async (req, res) => {
   const { page = 1, limit = 5 } = req.query;
   try {
